@@ -1,6 +1,6 @@
 {
   "name": "@samislam/sendres",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SendRes is a small and simple utility for sending formatted responses to the clients, it internally handles the `status: success | fail | error` based on the status code as well as other fields.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samislam/switcher.git"
+    "url": "git+https://github.com/samislam/sendres.git"
   },
   "keywords": [
     "sendRes",
