@@ -46,7 +46,7 @@ app.route("/").get(sendResMw(200, { message: "Hello" }));
 - `statusField`: *boolean*, weither to add the `status` property to the response or not (default: `true`).
 - `magicalOperators`: *boolean*, weither to disable the magical operators or to allow them (default: `true`).
 - `statusFieldValue`: *function*, this function will be called with the arguemnt `statusCode`, the return value determines the value of the status field.
-- `tidy`: *boolean*, weither to organize the order for the body of the response or not (default: `true`). 
+- `tidy`: *boolean*, weither to organize the order for the body of the response or not (default: `false`).
   - sendRes internally orders your json object, this can be disabled using this option. 
 - `resultsFieldName`: *string*, the name you want for the **results** property which gets added when you use the `$$data` operator if you want to change it (default: `'results'`).
 - `statusFieldName`: *string*, the name you want for the **status** property which gets added automatically if you want to change it (default: `'status'`).

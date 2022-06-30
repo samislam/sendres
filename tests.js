@@ -93,5 +93,41 @@ const app = express()
 //   // }
 // )
 
+// app.route('/').get(
+//   async (req, res, next) => {
+//     // ... some code
+//     const dbRes = await axios.get('https://jsonplaceholder.typicode.com/users') // [{name: Omer}, {name: Nadia}, {name: Boyd}]
+//     req.allUsers = dbRes.data
+//     next()
+//   },
+//   sendResMw(
+//     200,
+//     (req) => ({
+//       message: 'Welcome, here are all the users',
+//       $$data: req.allUsers,
+//     }),
+//     {
+//       statusField: false,
+//       magicalOperators: false,
+//       statusFieldValue(statusCode) {
+//         return statusCode === 200 ? 'Nice 👍' : 'ERROR'
+//       },
+//       tidy: false,
+//       resultsFieldName: 'records',
+//       statusFieldName: 'statusString',
+//     }
+//   )
+//   // { # 200
+//   //     status: 'success',
+//   //     message: 'Welcome, here are all the users',
+//   //     results: 3, // <-- notice
+//   //     data: [
+//   //         { name: Omer },
+//   //         { name: Nadia },
+//   //         { name: Boyd },
+//   //     ]
+//   // }
+// )
+
 console.clear()
 app.listen(8111, () => log.info(log.label, 'test running on port 8111...'))

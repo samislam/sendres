@@ -22,7 +22,7 @@ function _sendRes(statusCode, body, options) {
       else if (statusCode.toString().startsWith('4')) return 'fail'
       else return 'error'
     },
-    tidy: true,
+    tidy: false,
     resultsFieldName: 'results',
     statusFieldName: 'status',
   }
