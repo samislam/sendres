@@ -6,6 +6,10 @@
   "scripts": {
     "test": "nodemon -q tests.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samislam/switcher.git"
+  },
   "keywords": [
     "sendRes",
     "send-res",
@@ -19,6 +23,10 @@
     "http"
   ],
   "author": "Islam Yamor",
+  "bugs": {
+    "url": "https://github.com/samislam/sendres/issues"
+  },
+  "homepage": "https://github.com/samislam/sendres#readme",
   "license": "ISC",
   "dependencies": {
     "@samislam/checktypes": "^1.0.1",
