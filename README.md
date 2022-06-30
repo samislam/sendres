@@ -12,18 +12,14 @@ SendRes is a small and simple utility for sending formatted responses to the cli
 ### Example using the `sendRes()` function:
 
 ```js
-app.route('/api').get((req, res, next) => {
+app.route("/").get((req, res, next) => {
   // some code
-  sendRes(200, res, { message: 'Hello' })
-})
-
-/**
- * response (200 OK):
- *      {
- *          status: 'success',
- *          message: 'Hello'
- *      }
- */
+  sendRes(200, res, { message: "Hello" });
+  //   { # 200
+  //     "status": "success",
+  //     "message": "Hello"
+  //   }
+});
 ```
 ---------------
 ## sendRes as an ExpressJs middleware:
@@ -39,14 +35,11 @@ app.route('/api').get((req, res, next) => {
 ### Example using the `sendResMw()` middleware:
 
 ```js
-app.route('/api').get(sendResMw(200, { message: 'Hello' }))
-/**
- * response (200 OK):
- *      {
- *          status: 'success',
- *          message: 'Hello'
- *      }
- */
+app.route("/").get(sendResMw(200, { message: "Hello" }));
+//   { # 200
+//     "status": "success",
+//     "message": "Hello"
+//   }
 ```
 
 # Available options
@@ -61,24 +54,24 @@ app.route('/api').get(sendResMw(200, { message: 'Hello' }))
 
 ### Example of using the options arguemnt:
 ```js
-app.route('/api').get((req, res, next) => {
+app.route("/").get((req, res, next) => {
   // some code...
-
-  sendRes(404, res, { 
-    statusField(statusCode){
-        if(statusCode >= 200 && statusCode <= 205) return "OK"
-        else if(statusCode.toString().startsWith('4')) return "FAIL"
-        else return "ERR"
+  sendRes(
+    404,
+    res,
+    {},
+    {
+      statusFieldValue(statusCode) {
+        if (statusCode >= 200 && statusCode <= 205) return "OK";
+        else if (statusCode.toString().startsWith("4")) return "FAIL";
+        else return "ERR";
+      },
     }
-   })
-})
-
-/**
- * response (404 NOT_FOUND):
- *      {
- *          status: 'FAIL',
- *      }
- */
+  );
+  //   { # 404
+  //     "status": "FAIL"
+  //   }
+});
 ```
 
 # About the `status` property:
@@ -105,59 +98,55 @@ Magical operators are the fields that you add within the `body` parameter. All t
 ### Example without using the `$$data` magical operator:
 
 ```js
-app.route('/api').get(
-    (req, res, next)=>{
+app.route('/').get(
+  async (req, res, next) => {
     // ... some code
-    req.allUsers = await Users.find({}); // [{name: Omer}, {name: Nadia}, {name: Boyd}]
-    next();
-    },
-    sendRes(200, (req)=>({
-        message: 'Welcome, here are all the users',
-        data: req.allUsers,
-    }))
-    )
-    /**
- * response (200 OK):
- *      {
- *          status: 'success',
- *          message: 'Welcome, here are all the users',
- *          data: [
- *              { name: Omer },
- *              { name: Nadia },
- *              { name: Boyd },
- *          ]
- *      }
- */
+    const dbRes = await axios.get('https://jsonplaceholder.typicode.com/users') // [{name: Omer}, {name: Nadia}, {name: Boyd}]
+    req.allUsers = dbRes.data
+    next()
+  },
+  sendResMw(200, (req) => ({
+    message: 'Welcome, here are all the users',
+    data: req.allUsers,
+  }))
+  // { # 200
+  //     status: 'success',
+  //     message: 'Welcome, here are all the users',
+  //     data: [
+  //         { name: Omer },
+  //         { name: Nadia },
+  //         { name: Boyd },
+  //     ]
+  // }
+)
 ```
 
 
 ### Example using the `$$data` magical operator:
 
 ```js
-app.route('/api').get(
-    (req, res, next)=>{
+app.route('/').get(
+  async (req, res, next) => {
     // ... some code
-    req.allUsers = await Users.find({}); // [{name: Omer}, {name: Nadia}, {name: Boyd}]
-    next();
-    },
-    sendRes(200, (req)=>({
-        message: 'Welcome, here are all the users',
-        $$data: req.allUsers,
-    }))
-    )
-    /**
- * response (200 OK):
- *      {
- *          status: 'success',
- *          message: 'Welcome, here are all the users',
- *          results: 3, // <-- notice
- *          data: [
- *              { name: Omer },
- *              { name: Nadia },
- *              { name: Boyd },
- *          ]
- *      }
- */
+    const dbRes = await axios.get('https://jsonplaceholder.typicode.com/users') // [{name: Omer}, {name: Nadia}, {name: Boyd}]
+    req.allUsers = dbRes.data
+    next()
+  },
+  sendResMw(200, (req) => ({
+    message: 'Welcome, here are all the users',
+    $$data: req.allUsers,
+  }))
+  // { # 200
+  //     status: 'success',
+  //     message: 'Welcome, here are all the users',
+  //     results: 3, // <-- notice
+  //     data: [
+  //         { name: Omer },
+  //         { name: Nadia },
+  //         { name: Boyd },
+  //     ]
+  // }
+)
 ```
 
 ---------------

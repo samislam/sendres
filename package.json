@@ -4,7 +4,7 @@
   "description": "SendRes is a small and simple utility for sending formatted responses to the clients, it internally handles the `status: success | fail | error` based on the status code as well as other fields.",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon -q test.js"
+    "test": "nodemon -q tests.js"
   },
   "keywords": [
     "sendRes",
@@ -27,5 +27,11 @@
     "express": "^4.18.1",
     "json-keys-sort": "^2.1.0",
     "lodash": "^4.17.21"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "tabWidth": 2,
+    "printWidth": 80
   }
 }
