@@ -149,6 +149,13 @@ app.route('/').get(
 )
 ```
 
+# FAQ:
+
+**Q:** Why my middlewares after the sendRes middleware (sendResMw()) are not working?
+
+Because sendResMw was designed to be the last middleware in an expressJS stack, it does not call next() internally, as of version 1.0.x, a temperorary solution is to use the sendRes as a function instead of a middleware. a new feature is scheduled for the upcoming minor version, you'll be able to add the option `callNext: true`. 
+
+
 ---------------
 version: 1.0
 30 - June - 2022
